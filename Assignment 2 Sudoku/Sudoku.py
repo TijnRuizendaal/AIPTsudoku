@@ -56,8 +56,32 @@ class Sudoku:
         Adds a list of neighbors to each field
         @param grid: 9x9 list of Fields
         """
+        for row in range(9):
+            for col in range(9):
+                field: Field = grid[row][col]  # Current field for which neighbors are being set
+                neighbors: set[Field] = set()  # Set to hold unique neighbors
 
-    # TODO: for each field, add its neighbors
+                # Check horizontal neighbors
+                for x in range(9):
+                    if x != col:
+                        neighbors.add(grid[row][x])
+
+                # Check vertical neighbors
+                for y in range(9):
+                    if y != row:
+                        neighbors.add(grid[y][col])
+
+                # Divide and round to integer downwards and multiply by 3 to get range of this subgrid
+                subgrid_start_row = row // 3 * 3
+                subgrid_start_col = col // 3 * 3
+                for y in range(subgrid_start_row, subgrid_start_row + 3):
+                    for x in range(subgrid_start_col, subgrid_start_col + 3):
+                        if (y != row or x != col):
+                            neighbors.add(grid[y][x])
+
+                field.set_neighbours(list(neighbors))
+                print(
+                    f"Field ({row}, {col}) has {len(neighbors)} neighbors set.")  # Debugging statement to verify neighbors
 
     def board_to_string(self):
 

@@ -51,9 +51,7 @@ class Field:
         @param b:
         @return: All neighbors of this Field except b
         """
-        new_neighbours = self.neighbours
-        new_neighbours.remove(b)
-        return new_neighbours
+        return [n for n in self.neighbours if n != b]
 
     # endregion
 
@@ -62,19 +60,23 @@ class Field:
     def get_domain(self):
         return self.domain
 
+    def set_domain(self, domain):
+        self.domain = domain
+
     def get_domain_size(self):
         return len(self.domain)
 
     def remove_from_domain(self, value):
         """
-        Removes the given value from the domain, and possibly assigns the last value to the field
+        Removes the given value from the domain.
         :param value: value to remove
-        :return: true if the value was removed
+        :return: True if the value was removed, False otherwise.
         """
-        value_removed = self.domain.remove(value)
-        if len(self.domain) == 1:
-            self.set_value(self.domain[0])
-        return value_removed
+        if value in self.domain:
+            self.domain.remove(value)
+            return True
+        else:
+            return False
 
     # endregion
 

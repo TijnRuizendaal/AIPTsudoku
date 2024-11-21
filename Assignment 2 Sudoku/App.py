@@ -13,7 +13,9 @@ class App:
         game.show_sudoku()
         if (game.solve() and game.valid_solution()):
             print("Solved!")
+            game.show_sudoku()
         else:
+            game.show_sudoku()
             print("Could not solve this sudoku :(")
 
     @staticmethod
