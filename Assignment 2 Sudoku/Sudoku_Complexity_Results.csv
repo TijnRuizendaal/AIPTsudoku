@@ -1,31 +1,46 @@
 Sudoku File,Heuristic Combination,AC3 Heuristics Used,Backtracking Heuristics Used,Total Heuristics,MRV AC3,Degree AC3,MRV Backtracking,Degree Backtracking,Empty Cells,Constraint Checks,Complexity,Solved
-Sudoku1.txt,AC3 Heuristics Only (MRV & Degree),"MRV: True, Degree: True","MRV: False, Degree: False",2,TRUE,TRUE,FALSE,FALSE,50,4391,87.82,TRUE
-Sudoku1.txt,Backtracking Heuristics Only (MRV & Degree),"MRV: False, Degree: False","MRV: True, Degree: True",2,FALSE,FALSE,TRUE,TRUE,50,9825,196.5,TRUE
-Sudoku1.txt,"MRV & Degree for AC3, None for Backtracking","MRV: True, Degree: True","MRV: False, Degree: False",2,TRUE,TRUE,FALSE,FALSE,50,3782,75.64,TRUE
-Sudoku1.txt,MRV AC3 & Backtracking,"MRV: True, Degree: False","MRV: True, Degree: False",2,TRUE,FALSE,TRUE,FALSE,50,6411,128.22,TRUE
-Sudoku1.txt,"None for AC3, MRV & Degree for Backtracking","MRV: False, Degree: False","MRV: True, Degree: True",2,FALSE,FALSE,TRUE,TRUE,50,10038,200.76,TRUE
-Sudoku1.txt,Degree AC3 & Backtracking,"MRV: False, Degree: True","MRV: False, Degree: True",2,FALSE,TRUE,FALSE,TRUE,50,23051768,461035.36,FALSE
-Sudoku2.txt,Backtracking Heuristics Only (MRV & Degree),"MRV: False, Degree: False","MRV: True, Degree: True",2,FALSE,FALSE,TRUE,TRUE,51,7453,146.1373,TRUE
-Sudoku2.txt,"None for AC3, MRV & Degree for Backtracking","MRV: False, Degree: False","MRV: True, Degree: True",2,FALSE,FALSE,TRUE,TRUE,51,7170,140.5882,TRUE
-Sudoku2.txt,MRV AC3 & Backtracking,"MRV: True, Degree: False","MRV: True, Degree: False",2,TRUE,FALSE,TRUE,FALSE,51,3504,68.7059,TRUE
-Sudoku2.txt,AC3 Heuristics Only (MRV & Degree),"MRV: True, Degree: True","MRV: False, Degree: False",2,TRUE,TRUE,FALSE,FALSE,51,141695,2778.3333,TRUE
-Sudoku2.txt,"MRV & Degree for AC3, None for Backtracking","MRV: True, Degree: True","MRV: False, Degree: False",2,TRUE,TRUE,FALSE,FALSE,51,187058,3667.8039,TRUE
-Sudoku2.txt,Degree AC3 & Backtracking,"MRV: False, Degree: True","MRV: False, Degree: True",2,FALSE,TRUE,FALSE,TRUE,51,24153598,473599.9608,FALSE
-Sudoku3.txt,AC3 Heuristics Only (MRV & Degree),"MRV: True, Degree: True","MRV: False, Degree: False",2,TRUE,TRUE,FALSE,FALSE,52,27339,525.75,TRUE
-Sudoku3.txt,Backtracking Heuristics Only (MRV & Degree),"MRV: False, Degree: False","MRV: True, Degree: True",2,FALSE,FALSE,TRUE,TRUE,52,15100,290.3846,TRUE
-Sudoku3.txt,MRV AC3 & Backtracking,"MRV: True, Degree: False","MRV: True, Degree: False",2,TRUE,FALSE,TRUE,FALSE,52,6307,121.2885,TRUE
-Sudoku3.txt,"MRV & Degree for AC3, None for Backtracking","MRV: True, Degree: True","MRV: False, Degree: False",2,TRUE,TRUE,FALSE,FALSE,52,26049,500.9423,TRUE
-Sudoku3.txt,"None for AC3, MRV & Degree for Backtracking","MRV: False, Degree: False","MRV: True, Degree: True",2,FALSE,FALSE,TRUE,TRUE,52,18166,349.3462,TRUE
-Sudoku3.txt,Degree AC3 & Backtracking,"MRV: False, Degree: True","MRV: False, Degree: True",2,FALSE,TRUE,FALSE,TRUE,52,2133010,41019.4231,TRUE
-Sudoku4.txt,AC3 Heuristics Only (MRV & Degree),"MRV: True, Degree: True","MRV: False, Degree: False",2,TRUE,TRUE,FALSE,FALSE,47,181664,3865.1915,TRUE
-Sudoku4.txt,"MRV & Degree for AC3, None for Backtracking","MRV: True, Degree: True","MRV: False, Degree: False",2,TRUE,TRUE,FALSE,FALSE,47,177009,3766.1489,TRUE
-Sudoku4.txt,MRV AC3 & Backtracking,"MRV: True, Degree: False","MRV: True, Degree: False",2,TRUE,FALSE,TRUE,FALSE,47,4086795,86953.0851,TRUE
-Sudoku4.txt,Backtracking Heuristics Only (MRV & Degree),"MRV: False, Degree: False","MRV: True, Degree: True",2,FALSE,FALSE,TRUE,TRUE,47,23296125,495662.234,FALSE
-Sudoku4.txt,"None for AC3, MRV & Degree for Backtracking","MRV: False, Degree: False","MRV: True, Degree: True",2,FALSE,FALSE,TRUE,TRUE,47,24174790,514357.234,FALSE
-Sudoku4.txt,Degree AC3 & Backtracking,"MRV: False, Degree: True","MRV: False, Degree: True",2,FALSE,TRUE,FALSE,TRUE,47,39415061,838618.3191,FALSE
-Sudoku5.txt,Backtracking Heuristics Only (MRV & Degree),"MRV: False, Degree: False","MRV: True, Degree: True",2,FALSE,FALSE,TRUE,TRUE,46,9568,208,TRUE
-Sudoku5.txt,AC3 Heuristics Only (MRV & Degree),"MRV: True, Degree: True","MRV: False, Degree: False",2,TRUE,TRUE,FALSE,FALSE,46,52884,1149.6522,TRUE
-Sudoku5.txt,MRV AC3 & Backtracking,"MRV: True, Degree: False","MRV: True, Degree: False",2,TRUE,FALSE,TRUE,FALSE,46,3100,67.3913,TRUE
-Sudoku5.txt,"None for AC3, MRV & Degree for Backtracking","MRV: False, Degree: False","MRV: True, Degree: True",2,FALSE,FALSE,TRUE,TRUE,46,9129,198.4565,TRUE
-Sudoku5.txt,"MRV & Degree for AC3, None for Backtracking","MRV: True, Degree: True","MRV: False, Degree: False",2,TRUE,TRUE,FALSE,FALSE,46,54837,1192.1087,TRUE
-Sudoku5.txt,Degree AC3 & Backtracking,"MRV: False, Degree: True","MRV: False, Degree: True",2,FALSE,TRUE,FALSE,TRUE,46,31701265,689157.9348,FALSE
+Sudoku1.txt,All Heuristics (MRV & Degree for both AC3 and Backtracking),"MRV: True, Degree: True","MRV: True, Degree: True",4,TRUE,TRUE,TRUE,TRUE,50,9587,191.74,TRUE
+Sudoku1.txt,"Degree for AC3, MRV for Backtracking","MRV: False, Degree: True","MRV: True, Degree: False",2,FALSE,TRUE,TRUE,FALSE,50,6334,126.68,TRUE
+Sudoku1.txt,"MRV & Degree for AC3, None for Backtracking","MRV: True, Degree: True","MRV: False, Degree: False",2,TRUE,TRUE,FALSE,FALSE,50,3975,79.5,TRUE
+Sudoku1.txt,MRV AC3 & Backtracking,"MRV: True, Degree: False","MRV: True, Degree: False",2,TRUE,FALSE,TRUE,FALSE,50,6489,129.78,TRUE
+Sudoku1.txt,"None for AC3, MRV & Degree for Backtracking","MRV: False, Degree: False","MRV: True, Degree: True",2,FALSE,FALSE,TRUE,TRUE,50,9312,186.24,TRUE
+Sudoku1.txt,MRV for AC3 and Backtracking,"MRV: True, Degree: False","MRV: True, Degree: False",2,TRUE,FALSE,TRUE,FALSE,50,5935,118.7,TRUE
+Sudoku1.txt,"MRV for AC3, Degree for Backtracking","MRV: True, Degree: False","MRV: False, Degree: True",2,TRUE,FALSE,FALSE,TRUE,50,15229347,304586.94,FALSE
+Sudoku1.txt,Degree AC3 & Backtracking,"MRV: False, Degree: True","MRV: False, Degree: True",2,FALSE,TRUE,FALSE,TRUE,50,16054731,321094.62,FALSE
+Sudoku1.txt,Degree for AC3 and Backtracking,"MRV: False, Degree: True","MRV: False, Degree: True",2,FALSE,TRUE,FALSE,TRUE,50,13875677,277513.54,FALSE
+Sudoku2.txt,All Heuristics (MRV & Degree for both AC3 and Backtracking),"MRV: True, Degree: True","MRV: True, Degree: True",4,TRUE,TRUE,TRUE,TRUE,51,7100,139.2157,TRUE
+Sudoku2.txt,"Degree for AC3, MRV for Backtracking","MRV: False, Degree: True","MRV: True, Degree: False",2,FALSE,TRUE,TRUE,FALSE,51,3473,68.098,TRUE
+Sudoku2.txt,MRV AC3 & Backtracking,"MRV: True, Degree: False","MRV: True, Degree: False",2,TRUE,FALSE,TRUE,FALSE,51,3373,66.1373,TRUE
+Sudoku2.txt,"None for AC3, MRV & Degree for Backtracking","MRV: False, Degree: False","MRV: True, Degree: True",2,FALSE,FALSE,TRUE,TRUE,51,7576,148.549,TRUE
+Sudoku2.txt,MRV for AC3 and Backtracking,"MRV: True, Degree: False","MRV: True, Degree: False",2,TRUE,FALSE,TRUE,FALSE,51,3836,75.2157,TRUE
+Sudoku2.txt,"MRV & Degree for AC3, None for Backtracking","MRV: True, Degree: True","MRV: False, Degree: False",2,TRUE,TRUE,FALSE,FALSE,51,178530,3500.5882,TRUE
+Sudoku2.txt,"MRV for AC3, Degree for Backtracking","MRV: True, Degree: False","MRV: False, Degree: True",2,TRUE,FALSE,FALSE,TRUE,51,16314309,319888.4118,FALSE
+Sudoku2.txt,Degree AC3 & Backtracking,"MRV: False, Degree: True","MRV: False, Degree: True",2,FALSE,TRUE,FALSE,TRUE,51,16899117,331355.2353,FALSE
+Sudoku2.txt,Degree for AC3 and Backtracking,"MRV: False, Degree: True","MRV: False, Degree: True",2,FALSE,TRUE,FALSE,TRUE,51,16540444,324322.4314,FALSE
+Sudoku3.txt,All Heuristics (MRV & Degree for both AC3 and Backtracking),"MRV: True, Degree: True","MRV: True, Degree: True",4,TRUE,TRUE,TRUE,TRUE,52,18351,352.9038,TRUE
+Sudoku3.txt,"Degree for AC3, MRV for Backtracking","MRV: False, Degree: True","MRV: True, Degree: False",2,FALSE,TRUE,TRUE,FALSE,52,6117,117.6346,TRUE
+Sudoku3.txt,"MRV & Degree for AC3, None for Backtracking","MRV: True, Degree: True","MRV: False, Degree: False",2,TRUE,TRUE,FALSE,FALSE,52,25156,483.7692,TRUE
+Sudoku3.txt,"None for AC3, MRV & Degree for Backtracking","MRV: False, Degree: False","MRV: True, Degree: True",2,FALSE,FALSE,TRUE,TRUE,52,17568,337.8462,TRUE
+Sudoku3.txt,MRV AC3 & Backtracking,"MRV: True, Degree: False","MRV: True, Degree: False",2,TRUE,FALSE,TRUE,FALSE,52,6133,117.9423,TRUE
+Sudoku3.txt,MRV for AC3 and Backtracking,"MRV: True, Degree: False","MRV: True, Degree: False",2,TRUE,FALSE,TRUE,FALSE,52,5932,114.0769,TRUE
+Sudoku3.txt,"MRV for AC3, Degree for Backtracking","MRV: True, Degree: False","MRV: False, Degree: True",2,TRUE,FALSE,FALSE,TRUE,52,2324538,44702.6538,TRUE
+Sudoku3.txt,Degree AC3 & Backtracking,"MRV: False, Degree: True","MRV: False, Degree: True",2,FALSE,TRUE,FALSE,TRUE,52,2188120,42079.2308,TRUE
+Sudoku3.txt,Degree for AC3 and Backtracking,"MRV: False, Degree: True","MRV: False, Degree: True",2,FALSE,TRUE,FALSE,TRUE,52,2484057,47770.3269,TRUE
+Sudoku4.txt,"MRV & Degree for AC3, None for Backtracking","MRV: True, Degree: True","MRV: False, Degree: False",2,TRUE,TRUE,FALSE,FALSE,47,180153,3833.0426,TRUE
+Sudoku4.txt,"Degree for AC3, MRV for Backtracking","MRV: False, Degree: True","MRV: True, Degree: False",2,FALSE,TRUE,TRUE,FALSE,47,3510351,74688.3191,TRUE
+Sudoku4.txt,MRV for AC3 and Backtracking,"MRV: True, Degree: False","MRV: True, Degree: False",2,TRUE,FALSE,TRUE,FALSE,47,3666797,78016.9574,TRUE
+Sudoku4.txt,MRV AC3 & Backtracking,"MRV: True, Degree: False","MRV: True, Degree: False",2,TRUE,FALSE,TRUE,FALSE,47,3710524,78947.3191,TRUE
+Sudoku4.txt,All Heuristics (MRV & Degree for both AC3 and Backtracking),"MRV: True, Degree: True","MRV: True, Degree: True",4,TRUE,TRUE,TRUE,TRUE,47,17553606,373480.9787,FALSE
+Sudoku4.txt,"MRV for AC3, Degree for Backtracking","MRV: True, Degree: False","MRV: False, Degree: True",2,TRUE,FALSE,FALSE,TRUE,47,27719338,589773.1489,FALSE
+Sudoku4.txt,"None for AC3, MRV & Degree for Backtracking","MRV: False, Degree: False","MRV: True, Degree: True",2,FALSE,FALSE,TRUE,TRUE,47,17504028,372426.1277,FALSE
+Sudoku4.txt,Degree AC3 & Backtracking,"MRV: False, Degree: True","MRV: False, Degree: True",2,FALSE,TRUE,FALSE,TRUE,47,25269753,537654.3191,FALSE
+Sudoku4.txt,Degree for AC3 and Backtracking,"MRV: False, Degree: True","MRV: False, Degree: True",2,FALSE,TRUE,FALSE,TRUE,47,31061150,660875.5319,FALSE
+Sudoku5.txt,All Heuristics (MRV & Degree for both AC3 and Backtracking),"MRV: True, Degree: True","MRV: True, Degree: True",4,TRUE,TRUE,TRUE,TRUE,46,9034,196.3913,TRUE
+Sudoku5.txt,"Degree for AC3, MRV for Backtracking","MRV: False, Degree: True","MRV: True, Degree: False",2,FALSE,TRUE,TRUE,FALSE,46,3067,66.6739,TRUE
+Sudoku5.txt,"MRV & Degree for AC3, None for Backtracking","MRV: True, Degree: True","MRV: False, Degree: False",2,TRUE,TRUE,FALSE,FALSE,46,51616,1122.087,TRUE
+Sudoku5.txt,"None for AC3, MRV & Degree for Backtracking","MRV: False, Degree: False","MRV: True, Degree: True",2,FALSE,FALSE,TRUE,TRUE,46,9592,208.5217,TRUE
+Sudoku5.txt,MRV AC3 & Backtracking,"MRV: True, Degree: False","MRV: True, Degree: False",2,TRUE,FALSE,TRUE,FALSE,46,3164,68.7826,TRUE
+Sudoku5.txt,MRV for AC3 and Backtracking,"MRV: True, Degree: False","MRV: True, Degree: False",2,TRUE,FALSE,TRUE,FALSE,46,3010,65.4348,TRUE
+Sudoku5.txt,"MRV for AC3, Degree for Backtracking","MRV: True, Degree: False","MRV: False, Degree: True",2,TRUE,FALSE,FALSE,TRUE,46,23816516,517750.3478,FALSE
+Sudoku5.txt,Degree AC3 & Backtracking,"MRV: False, Degree: True","MRV: False, Degree: True",2,FALSE,TRUE,FALSE,TRUE,46,22859542,496946.5652,FALSE
+Sudoku5.txt,Degree for AC3 and Backtracking,"MRV: False, Degree: True","MRV: False, Degree: True",2,FALSE,TRUE,FALSE,TRUE,46,25304161,550090.4565,FALSE
