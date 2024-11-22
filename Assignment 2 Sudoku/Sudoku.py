@@ -80,8 +80,6 @@ class Sudoku:
                             neighbors.add(grid[y][x])
 
                 field.set_neighbours(list(neighbors))
-                print(
-                    f"Field ({row}, {col}) has {len(neighbors)} neighbors set.")  # Debugging statement to verify neighbors
 
     def board_to_string(self):
 
