@@ -60,9 +60,6 @@ class Field:
     def get_domain(self):
         return self.domain
 
-    def set_domain(self, domain):
-        self.domain = domain
-
     def get_domain_size(self):
         return len(self.domain)
 

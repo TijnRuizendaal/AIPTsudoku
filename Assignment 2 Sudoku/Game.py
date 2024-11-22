@@ -1,21 +1,101 @@
 from collections import deque
-from Field import Field
+import time
+
 
 class Game:
-    def __init__(self, sudoku, use_mrv=True, use_degree_heuristic=True, feedback=True):
+    def __init__(self, sudoku, feedback=False, enable_preprocessing=True,
+                 use_mrv_ac3=False, use_degree_ac3=False,
+                 use_mrv_backtracking=False, use_degree_backtracking=False):
         """
         Initialize the Game class with optional heuristics and feedback.
         @param sudoku: The Sudoku puzzle to solve.
-        @param use_mrv: Boolean indicating whether to use the MRV heuristic.
-        @param use_degree_heuristic: Boolean indicating whether to use the Degree Heuristic.
         @param feedback: Boolean indicating whether to print detailed feedback.
+        @param enable_preprocessing: Boolean indicating whether to preprocess constraints.
+        @param use_mrv_ac3: Boolean to enable MRV heuristic in AC-3.
+        @param use_degree_ac3: Boolean to enable Degree Heuristic in AC-3.
+        @param use_mrv_backtracking: Boolean to enable MRV heuristic in Backtracking.
+        @param use_degree_backtracking: Boolean to enable Degree Heuristic in Backtracking.
         """
-        self.sudoku = sudoku  # Reference to the Sudoku object
-        self.use_mrv = use_mrv
-        self.use_degree_heuristic = use_degree_heuristic
-        self.feedback = feedback  # Feedback toggle
-        self.queue = deque()  # Queue for AC-3
-        self.preprocess_constraints()
+        self.sudoku = sudoku
+        self.feedback = feedback
+        self.enable_preprocessing = enable_preprocessing
+        self.use_mrv_ac3 = use_mrv_ac3
+        self.use_degree_ac3 = use_degree_ac3
+        self.use_mrv_backtracking = use_mrv_backtracking
+        self.use_degree_backtracking = use_degree_backtracking
+        self.queue = deque()
+        self.recursive_calls = 0
+        self.constraint_checks = 0
+        self.domain_reductions = 0
+        self.assignments = 0
+        self.start_time = None
+        self.end_time = None
+        self.empty_cells = sum(1 for row in sudoku.get_board() for field in row if not field.is_finalized())
+
+        if self.enable_preprocessing:
+            if self.feedback:
+                print("Preprocessing constraints...")
+            self.preprocess_constraints()
+
+    def ac3(self) -> bool:
+        """
+        Applies the AC-3 algorithm to enforce arc consistency.
+        Uses heuristics to prioritize arcs if enabled.
+        """
+        board = self.sudoku.get_board()
+        self.queue = deque([(field, neighbor) for row in board for field in row for neighbor in field.get_neighbours()])
+
+        while self.queue:
+            xi, xj = self.queue.popleft()
+            if self.revise(xi, xj):
+                if xi.get_domain_size() == 0:  # Domain wipeout
+                    return False
+
+                # Re-add arcs involving xi
+                neighbors = xi.get_other_neighbours(xj)
+                if self.use_mrv_ac3:
+                    neighbors = sorted(neighbors, key=lambda n: n.get_domain_size())
+                if self.use_degree_ac3:
+                    neighbors = sorted(
+                        neighbors,
+                        key=lambda n: len([nb for nb in n.get_neighbours() if not nb.is_finalized()]),
+                        reverse=True
+                    )
+                for xk in neighbors:
+                    self.queue.append((xk, xi))
+        return True
+
+    def backtracking_search(self) -> bool:
+        """
+        Performs backtracking search to assign values to all fields.
+        Uses heuristics for variable selection if enabled.
+        """
+        self.recursive_calls += 1
+        # Add a timeout check periodically
+        if self.timeout and (time.time() - self.start_time) > self.timeout:
+            raise TimeoutError("Solving exceeded time limit")
+        unassigned = self.get_unassigned_fields()
+        if not unassigned:
+            return True
+
+        field = unassigned[0]  # Default choice
+        if self.use_mrv_backtracking:
+            field = min(unassigned, key=lambda f: f.get_domain_size())
+        if self.use_degree_backtracking:
+            min_domain_size = field.get_domain_size()
+            candidates = [f for f in unassigned if f.get_domain_size() == min_domain_size]
+            field = max(candidates, key=lambda f: len([n for n in f.get_neighbours() if not n.is_finalized()]))
+
+        for value in field.get_domain():
+            self.constraint_checks += 1
+            if self.is_consistent(field, value):
+                field.set_value(value)
+                self.assignments += 1
+                if self.backtracking_search():
+                    return True
+                field.set_value(0)
+
+        return False
 
     def preprocess_constraints(self):
         """
@@ -47,52 +127,36 @@ class Game:
                 return row_index, row.index(field)
         return -1, -1  # Not found (should not happen)
 
-    def solve(self) -> bool:
+    def solve(self, timeout=20) -> bool:
         """
         Solves the Sudoku puzzle using AC-3 algorithm and backtracking search.
-        Provides feedback about the solving process if enabled.
-        @return: True if the puzzle is solved, False otherwise.
         """
+        self.start_time = time.time()  # Start the timer
+        self.timeout = timeout
+
         if self.feedback:
             print("Starting AC-3 algorithm...")
 
         if not self.ac3():
             if self.feedback:
                 print("AC-3 failed to solve the puzzle.")
+                self.display_metrics()
+            self.end_time = time.time()  # End the timer
             return False
 
         if self.is_fully_assigned():
             if self.feedback:
                 print("Sudoku solved successfully with AC-3.")
+                self.display_metrics()
+            self.end_time = time.time()  # End the timer
             return True
         else:
             if self.feedback:
                 print("AC-3 could not fully solve the puzzle. Proceeding with backtracking search...")
-            return self.backtracking_search()
-
-    def backtracking_search(self) -> bool:
-        """
-        Performs backtracking search to assign values to all fields.
-        @return: True if a solution is found, False otherwise.
-        """
-        unassigned = self.get_unassigned_fields()
-        if not unassigned:
-            return True  # Puzzle solved
-
-        # Apply MRV heuristic if enabled
-        if self.use_mrv:
-            field = min(unassigned, key=lambda f: f.get_domain_size())
-        else:
-            field = unassigned[0]
-
-        for value in field.get_domain():
-            if self.is_consistent(field, value):
-                field.set_value(value)
-                if self.backtracking_search():
-                    return True
-                field.set_value(0)  # Unassign the value during backtracking
-
-        return False
+                self.display_metrics()
+            result = self.backtracking_search()
+            self.end_time = time.time()  # End the timer
+            return result
 
     def get_unassigned_fields(self):
         return [field for row in self.sudoku.get_board() for field in row if not field.is_finalized()]
@@ -102,40 +166,9 @@ class Game:
         Checks if assigning 'value' to 'field' is consistent with the Sudoku rules.
         """
         for neighbor in field.get_neighbours():
+            self.constraint_checks += 1  # Increment constraint check count
             if neighbor.is_finalized() and neighbor.get_value() == value:
                 return False
-        return True
-
-    def ac3(self) -> bool:
-        """
-        Applies the AC-3 algorithm to enforce arc consistency.
-        Provides feedback about changes in domains.
-        @return: True if arc consistency is achieved without domain wipeouts, False otherwise.
-        """
-        board = self.sudoku.get_board()
-        self.queue = deque([(field, neighbor) for row in board for field in row for neighbor in field.get_neighbours()])
-
-        while self.queue:
-            xi, xj = self.queue.popleft()
-            xi_row, xi_col = self.get_field_coordinates(xi)
-            xj_row, xj_col = self.get_field_coordinates(xj)
-
-            if self.feedback:
-                print(f"Processing arc ({xi} at ({xi_row}, {xi_col}), {xj} at ({xj_row}, {xj_col}))")
-
-            if self.revise(xi, xj):
-                if self.feedback:
-                    print(f"Revised domain for Field at ({xi_row}, {xi_col}): {xi.get_domain()}")
-
-                if xi.get_domain_size() == 0:  # Domain wipeout
-                    if self.feedback:
-                        print(f"Domain wipeout at Field at ({xi_row}, {xi_col}).")
-                    return False
-
-                # Re-add all arcs involving xi except xj
-                for xk in xi.get_other_neighbours(xj):
-                    self.queue.append((xk, xi))
-
         return True
 
     def revise(self, xi, xj) -> bool:
@@ -150,11 +183,11 @@ class Game:
         if xi.is_finalized():
             return False
 
-        # If xj is finalized, remove its value from xi's domain
         if xj.is_finalized():
             xj_value = xj.get_value()
             if xj_value in xi.get_domain():
                 xi.remove_from_domain(xj_value)
+                self.domain_reductions += 1  # Increment domain reductions count
                 revised = True
                 if self.feedback:
                     xi_row, xi_col = self.get_field_coordinates(xi)
@@ -170,6 +203,17 @@ class Game:
         """
         board = self.sudoku.get_board()
         return all(field.is_finalized() for row in board for field in row)
+
+    def display_metrics(self):
+        total_time = self.end_time - self.start_time
+        print("\nSolver Metrics:")
+        print(f"Total Execution Time: {total_time:.6f} seconds")
+        print(f"Total Recursive Calls: {self.recursive_calls}")
+        print(f"Total Constraint Checks: {self.constraint_checks}")
+        print(f"Total Domain Reductions: {self.domain_reductions}")
+        print(f"Total Assignments Made: {self.assignments}")
+        print(f"Empty cells at start: {self.empty_cells}")
+        print(f"Constraints checked per empty cell: {self.constraint_checks / self.empty_cells}")
 
     def valid_solution(self) -> bool:
         """
